@@ -1,5 +1,3 @@
-// To display data in the Activity column, you need to use the bumped_at property of each topic, which is a timestamp in the ISO 8601 format. You need to process this data before you can show how much time has passed since a topic had any activity.
-
 const forumLatest = "https://forum-proxy.freecodecamp.rocks/latest";
 const forumTopicUrl = "https://forum.freecodecamp.org/t/";
 const forumCategoryUrl = "https://forum.freecodecamp.org/c/";
@@ -103,20 +101,19 @@ const showLatestPosts = (data) => {
   const { topic_list, users } = data;
   const { topics } = topic_list;
 
-  postsContainer.innerHTML = topics
-    .map((item) => {
-      const {
-        id,
-        title,
-        views,
-        posts_count,
-        slug,
-        posters,
-        category_id,
-        bumped_at,
-      } = item;
+  postsContainer.innerHTML = topics.map((item) => {
+    const {
+      id,
+      title,
+      views,
+      posts_count,
+      slug,
+      posters,
+      category_id,
+      bumped_at,
+    } = item;
 
-      return `
+    return `
     <tr>
       <td>
         <a target="_blank" href="${forumTopicUrl}${slug}/${id}" class="post-title">${title}</a>
@@ -132,6 +129,6 @@ const showLatestPosts = (data) => {
       <td>${viewCount(views)}</td>
       <td>${timeAgo(bumped_at)}</td>
     </tr>`;
-    })
-    .join("");
+  }).join("");
 };
+
